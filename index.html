@@ -49,6 +49,7 @@
     }
 
     start_button.onclick = () => {
+      speak('始めます');
       start_time = Date.now();
       displayRemainingTime(getRemainingTimeText(getRemainingTime()));
       interval_id = setInterval(() => {
