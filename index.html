@@ -10,12 +10,19 @@
   </style>
 </head>
 <body>
-  <div class='container'>
-    <label for='how_many_minutes'>秒数:</label>
-    <input id='how_many_minutes' type='number' value='3'>
+  <div class='container-fluid'>
+    <div class='row'>
+      <div class='col-md form-inline'>
+        <label for='how_many_minutes' class='form-label'>秒数:</label>
+        <input id='how_many_minutes' type='number' value='3' class='form-control'>
+      </div>
 
-    <button id='start_button' class='btn btn-primary'>start</button>
-    <span id='remaining_time_area' class='col-sm-12'></span>
+      <div class='col-md'>
+        <button id='start_button' class='btn btn-primary col-md-4'>start</button>
+      </div>
+
+      <div id='remaining_time_area' class='col-md'></div>
+    </div>
   </div>
 
   <script>
