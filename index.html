@@ -49,7 +49,9 @@
     }
 
     start_button.onclick = () => {
+      // https://stackoverflow.com/questions/52769453/trying-to-use-speechsynthesis-api-in-ios-webview-app
       speak('始めます');
+
       start_time = Date.now();
       displayRemainingTime(getRemainingTimeText(getRemainingTime()));
       interval_id = setInterval(() => {
