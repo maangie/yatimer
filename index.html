@@ -1,0 +1,57 @@
+<body>
+  <input id='how_many_minutes' type='number' value='3'>
+  <button id='start_button'>start</button>
+  <span id='remaining_time_area'></span>
+
+  <script>
+    let start_time = null;
+    let interval_id = null;
+
+    function speak(message) {
+      let speech = new SpeechSynthesisUtterance(message);
+      speech.lang = 'ja-JP';
+      window.speechSynthesis.speak(speech);
+    }
+
+    function getRemainingTime() {
+      return how_many_minutes.value * 60 - Math.floor((Date.now() - start_time) / 1000);
+    }
+
+    function getRemainingTimeText(remaining_time) {
+      return remaining_time_text = `あと ${remaining_time} 秒`;
+    }
+
+    function displayRemainingTime(remaining_time_text) {
+      remaining_time_area.textContent = remaining_time_text;
+    }
+
+    function stopTimer() {
+      speak('終わりました');
+      clearInterval(interval_id);
+      interval_id = null;
+      remaining_time_area.textContent = '';
+    }
+
+    start_button.onclick = () => {
+      start_time = Date.now();
+      displayRemainingTime(getRemainingTimeText(getRemainingTime()));
+      interval_id = setInterval(() => {
+        let remaining_time = getRemainingTime();
+
+        if (remaining_time <= 0) {
+          stopTimer();
+          return;
+        }
+
+        let remaining_time_text = getRemainingTimeText(remaining_time);
+
+        if (remaining_time % 30 == 0) speak(remaining_time_text);
+
+        if (remaining_time < 30 && remaining_time % 10 == 0)
+          speak(`${remaining_time}秒`);
+
+        displayRemainingTime(remaining_time_text);
+      }, 1000)
+    }
+  </script>
+</body>
