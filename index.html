@@ -13,12 +13,28 @@
       window.speechSynthesis.speak(speech);
     }
 
+    function formatTime(seconds) {
+      let result = '';
+
+      //時間計算
+      let hour = Math.floor((seconds / 60) / 60);
+      let min = Math.floor((seconds / 60) % 60);
+      let sec = Math.floor(seconds % 60);
+
+      //フォーマット
+      if (hour > 0) result += hour + '時';
+      if (min > 0) result += min + '分';
+      if (sec > 0) result += sec + '秒';
+
+      return result;
+    }
+
     function getRemainingTime() {
       return how_many_minutes.value * 60 - Math.floor((Date.now() - start_time) / 1000);
     }
 
     function getRemainingTimeText(remaining_time) {
-      return remaining_time_text = `あと ${remaining_time} 秒`;
+      return remaining_time_text = `あと ${formatTime(remaining_time)}`;
     }
 
     function displayRemainingTime(remaining_time_text) {
