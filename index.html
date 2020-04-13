@@ -9,24 +9,44 @@
   </style>
 </head>
 <body>
-  <div class='container'>
-    <div class='row'>
-      <div class='col-sm'>
-        <div class='input-group'>
-          <div class='input-group-prepend'>
-            <label for='how_many_minutes' class='form-label input-group-text'>分数</label>
+  <div class='card'>
+    <div class='card-header'>読み上げタイマー</div>
+
+    <div class='card-body'>
+      <div class='container'>
+        <div class='row'>
+          <div class='col-sm'>
+            <div class='input-group'>
+              <div class='input-group-prepend'>
+                <label for='how_many_minutes' class='form-label input-group-text'>分数</label>
+              </div>
+              <input id='how_many_minutes' type='number' value='3' class='form-control'>
+            </div>
           </div>
-          <input id='how_many_minutes' type='number' value='3' class='form-control'>
+
+          <div class='col-sm'>
+            <div class='float-right float-lg-none'>
+              <button id='start_button' class='btn btn-primary'>start</button>
+            </div>
+          </div>
+
+          <div id='remaining_time_area' class='col-sm'></div>
         </div>
       </div>
+    </div>
+  </div>
 
-      <div class='col-sm'>
-        <div class='float-right float-lg-none'>
-          <button id='start_button' class='btn btn-primary'>start</button>
+  <div class='card'>
+    <div class='card-header'>カウントアップ</div>
+
+    <div class='card-body'>
+      <div class='container'>
+        <div class='row'>
+          <div class='col'>
+            <button id='countup_button' class='btn btn-primary'>start</button>
+          </div>
         </div>
       </div>
-
-      <div id='remaining_time_area' class='col-sm'></div>
     </div>
   </div>
 
@@ -101,6 +121,14 @@
 
         displayRemainingTime(remaining_time_text);
       }, 1000)
+    }
+
+    countup_button.onclick = () => {
+      speak('始めます');
+      start_time = Date.now();
+      setInterval(() => {
+        speak(Math.floor((Date.now() - start_time) / 1000));
+      }, 1000);
     }
   </script>
 </body>
